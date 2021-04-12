@@ -267,7 +267,7 @@ class MyProvider extends ChangeNotifier {
     var querySnapshot = await FirebaseFirestore.instance
         .collection('food-categories')
         .doc('GtAM48SvhcK8JsfkxAkJ')
-        .collection('burger')
+        .collection('salad')
         .get();
 
     querySnapshot.docs.forEach((salad) {

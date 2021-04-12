@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodiu/pages/home_page.dart';
+import 'package:foodiu/pages/order_page.dart';
 import 'package:foodiu/providers/my_provider.dart';
-
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
@@ -165,11 +165,21 @@ class CartPage extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 60),
-          Text(
-            'Check Out',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderPage(total: total),
+                ),
+              );
+            },
+            child: Text(
+              'Check Out',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
             ),
           ),
         ],

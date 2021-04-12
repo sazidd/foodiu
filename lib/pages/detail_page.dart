@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodiu/pages/cart_page.dart';
 import 'package:foodiu/pages/home_page.dart';
 import 'package:foodiu/providers/my_provider.dart';
-
 import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
@@ -66,6 +65,7 @@ class _DetailPageState extends State<DetailPage> {
     return Container(
       child: Image.network(
         widget.image ?? 'https://avatars.githubusercontent.com/u/53822204v=4',
+        height: 230,
       ),
     );
   }

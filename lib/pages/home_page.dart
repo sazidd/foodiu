@@ -7,10 +7,10 @@ import 'package:foodiu/pages/cart_page.dart';
 import 'package:foodiu/pages/categories_page.dart';
 import 'package:foodiu/pages/detail_page.dart';
 import 'package:foodiu/pages/login_page.dart';
+import 'package:foodiu/pages/order_page.dart';
 import 'package:foodiu/pages/profile_page.dart';
 import 'package:foodiu/providers/my_provider.dart';
 import 'package:foodiu/widgets/food_item.dart';
-
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             accountName: Text('Rehman Sazid'),
-            accountEmail: Text('rehmansazid@email.com'),
+            accountEmail: Text('rehmansazid32@email.com'),
           ),
           ListTile(
             leading: const Icon(Icons.person),
@@ -108,22 +108,16 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: const Icon(Icons.shop),
             title: const Text('Order'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('About'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderPage(total: null),
+                ),
+              );
+            },
           ),
           const Divider(),
-          ListTile(
-            title: const Text('Communicate'),
-          ),
-          // ListTile(
-          //   leading: const Icon(Icons.lock),
-          //   title: const Text('Change'),
-          //   onTap: () {},
-          // ),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Log Out'),
@@ -190,31 +184,31 @@ class _HomePageState extends State<HomePage> {
         builder: (context, constraints) {
           if (constraints.maxWidth >= 600) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Spacer(),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          fillColor: Colors.black,
-                          prefix: const Icon(Icons.search),
-                          hintText: 'Search food...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     const Spacer(),
+                //     Expanded(
+                //       child: TextField(
+                //         decoration: InputDecoration(
+                //           fillColor: Colors.black,
+                //           prefix: const Icon(Icons.search),
+                //           hintText: 'Search food...',
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(8),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 Expanded(
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16).copyWith(top: 0),
                         scrollDirection: Axis.vertical,
                         child: Column(
                           children: [
@@ -228,34 +222,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          width: 200,
-                          height: 300,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.only(bottom: 32),
-                            itemCount: foods.length,
-                            itemBuilder: (context, index) {
-                              final food = foods[index]!;
-                              return FoodItem(
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailPage(
-                                        image: food.image,
-                                        name: food.name,
-                                        price: food.price,
-                                      ),
+                        child: GridView.count(
+                          padding: const EdgeInsets.only(bottom: 32),
+                          crossAxisCount: 6,
+                          childAspectRatio: 0.7,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          children: foods.map((food) {
+                            return FoodItem(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                      image: food!.image,
+                                      name: food.name,
+                                      price: food.price,
                                     ),
-                                  );
-                                },
-                                image: food.image,
-                                name: food.name,
-                                price: food.price,
-                              );
-                            },
-                          ),
+                                  ),
+                                );
+                              },
+                              image: food!.image,
+                              name: food.name,
+                              price: food.price,
+                            );
+                          }).toList(),
                         ),
                       ),
                     ],
@@ -266,17 +257,17 @@ class _HomePageState extends State<HomePage> {
           }
           return Column(
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.black,
-                  prefix: const Icon(Icons.search),
-                  hintText: 'Search food...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
+              // TextField(
+              //   decoration: InputDecoration(
+              //     fillColor: Colors.black,
+              //     prefix: const Icon(Icons.search),
+              //     hintText: 'Search food...',
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 16),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -295,9 +286,9 @@ class _HomePageState extends State<HomePage> {
                 child: GridView.count(
                   padding: const EdgeInsets.only(bottom: 32),
                   crossAxisCount: 2,
-                  childAspectRatio: 0.8,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
+                  childAspectRatio: 0.85,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
                   children: foods.map((food) {
                     return FoodItem(
                       onTap: () {
@@ -457,29 +448,28 @@ class _HomePageState extends State<HomePage> {
     required String? image,
     required String name,
   }) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: image != null
-                    ? NetworkImage(image)
-                    : NetworkImage(
-                        'https://avatars.githubusercontent.com/u/52134364?v=4',
-                      ),
+    return Card(
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Image.network(
+                image!,
+                height: 60,
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(name),
-      ],
+          const SizedBox(height: 8),
+          Text(name),
+          const SizedBox(height: 8),
+        ],
+      ),
     );
   }
 }

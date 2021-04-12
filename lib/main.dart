@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Food Delivery',
+      title: 'Foodiu',
       theme: ThemeData(
         primarySwatch: Colors.pink,
         textTheme: GoogleFonts.merriweatherSansTextTheme(),
